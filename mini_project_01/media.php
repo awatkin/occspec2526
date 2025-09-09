@@ -18,17 +18,20 @@ echo "<br>";  # line break for clarity and easy of reading.
 
 echo "<table>";  #table used to help with layout of my hyperlinks
 echo "<tr>";  # opens the table row (tr)
-echo"<td> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
-echo"<td> <a href='plot.php'>Plot</a></td>";
-echo "<td> <a href='media.php'>Media</a></td>";
-echo "<td> <a href='mail.php'>Mail List</a></td>";
+echo"<td class='linkbox'> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
+echo"<td class='linkbox'> <a href='plot.php'>Plot</a></td>";
+echo "<td class='linkbox'> <a href='media.php'>Media</a></td>";
+echo "<td class='linkbox'> <a href='mail.php'>Mail List</a></td>";
 echo "</tr>";  # closes the row of the table.
 echo "</table>";  # closes the table off
 
 echo "<br>";
 
-echo "<h2> Media from The Transformers Movie";  # sets a h2 heading as a welcome
+echo "<h2> Welcome to my Transformers Mini Project Website</h2>";  # sets a h2 heading as a welcome
 
+# copied the embed code from youtube to host the video.
+
+echo "<iframe width='560' height='315' src='https://www.youtube.com/embed/D97zxcIwD4k?si=xlAHvgA7gReJxL3g' title='YouTube video player' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' referrerpolicy='strict-origin-when-cross-origin' allowfullscreen></iframe>";
 
 echo "</body>";
 

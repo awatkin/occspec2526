@@ -16,18 +16,31 @@ echo "<body>";  # opens the body for the main content of the page.
 echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";  #sets a logo up for the top of each page
 echo "<br>";  # line break for clarity and easy of reading.
 
-echo "<table>";  #table used to help with layout of my hyperlinks
-echo "<tr>";  # opens the table row (tr)
-echo"<td> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
-echo"<td> <a href='plot.php'>Plot</a></td>";
-echo "<td> <a href='media.php'>Media</a></td>";
-echo "<td> <a href='mail.php'>Mail List</a></td>";
-echo "</tr>";  # closes the row of the table.
-echo "</table>";  # closes the table off
+
 
 echo "<br>";
 
-echo "<h2> Sign up for the mailing list";  # sets a h2 heading as a welcome
+echo "<h2> Join The Transformers Movie mailing list below</h2>";  # sets a h2 heading as a welcome
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST has been used (submit button on a form)
+    echo "<h2> Your mailing list information confirmed </h2>";
+    echo "Your name: " . $_POST['fname']. " ". $_POST['sname'];  # uses the full stop to concatenate the text and the post value from the form
+    echo "<br>";
+    echo "Your email: "  . $_POST['email']. " email confirmed ". $_POST['emailc'];  # shows the entered email addresses
+    echo "<br>";
+}
+
+echo "<form method='post' action=''>";
+
+echo "<input type='text' name='fname' placeholder='First Name' />";  # text for name
+echo "<br>";
+echo "<input type='text' name='sname' placeholder='Surname' />"; # text for surname
+echo "<br>";
+echo "<input type='email' name='email' placeholder='Email' />"; #email box for email
+echo "<br>";
+echo "<input type='email' name='emailc' placeholder='Confirm email' />";  # email again for confirming
+echo "<br>";
+echo "<input type='submit' name='submit' value='submit' />";  # submit button to call the page and send the data
 
 
 echo "</body>";

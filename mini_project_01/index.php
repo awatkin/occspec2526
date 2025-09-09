@@ -18,10 +18,10 @@ echo "<br>";  # line break for clarity and easy of reading.
 
     echo "<table>";  #table used to help with layout of my hyperlinks
         echo "<tr>";  # opens the table row (tr)
-            echo"<td> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
-            echo"<td> <a href='plot.php'>Plot</a></td>";
-            echo "<td> <a href='media.php'>Media</a></td>";
-            echo "<td> <a href='mail.php'>Mail List</a></td>";
+            echo"<td class='linkbox'> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
+            echo"<td class='linkbox'> <a href='plot.php'>Plot</a></td>";
+            echo "<td class='linkbox'> <a href='media.php'>Media</a></td>";
+            echo "<td class='linkbox'> <a href='mail.php'>Mail List</a></td>";
         echo "</tr>";  # closes the row of the table.
     echo "</table>";  # closes the table off
 
@@ -33,7 +33,7 @@ echo "<p class='content'> The Transformers film is an 1980s animated feature len
 
 echo "<p class='content'> The movie, with its powerful 80s rock soundtrack follows the exploits of Hotrod and the rest of the Autobots against the newly formed Galvatron and the decepticons. </p>";
 
-
+echo "<img src=images/movie_cover.jpg>";  # image added to improve the appearance of the index page.
 
 echo "</body>";
 
