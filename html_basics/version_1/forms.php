@@ -1,13 +1,13 @@
 <?php // This open the php code section
 
-echo "<!DOCTYPE html>";
+echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
 echo "<html>";
 
 echo "<head>";
 
-    echo "<title> watkin</title>";
-    echo "<link rel='stylesheet' type='text/css' href='css/styles.css' />";
+    echo "<title> watkin</title>";  # sets the title of the page (web browser tab)
+    echo "<link rel='stylesheet' type='text/css' href='css/styles.css' />";  # links to the external style sheet
 
 echo "</head>";
 
@@ -17,8 +17,8 @@ echo "<body>";
 echo "<h1> Watkin </h1>";
 echo "<br>";
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-    echo "Your name: " . $_POST['name'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST has been used (submit button on a form)
+    echo "Your name: " . $_POST['name'];  # uses the full stop to concatenate the text and the post value from the form
     echo "<br>";
     echo "Your email: "  . $_POST['email'];
     echo "<br>";
