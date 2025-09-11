@@ -1,6 +1,5 @@
 <?php
 echo "<div class='nav'>";
-echo"<br>";
     echo "<table>";  #table used to help with layout of my hyperlinks
 
         echo "<tr>";  # opens the table row (tr)

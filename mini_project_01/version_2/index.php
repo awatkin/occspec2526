@@ -15,9 +15,9 @@ echo "<body>";  # opens the body for the main content of the page.
 
 echo "<div class='container'>";
 
-    include_once "assets/topbar.php";
+    require_once "assets/topbar.php";
 
-    include_once "assets/nav.php";
+    require_once "assets/nav.php";
 
 echo "<div class='content'>";
     echo "<br>";
