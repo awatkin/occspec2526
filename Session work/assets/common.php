@@ -1,0 +1,1 @@
+<?php #this is to store reusable code for all pages

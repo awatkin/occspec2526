@@ -1,0 +1,23 @@
+.container {
+    display: flex;  /* sets the page to display as flex */
+    justify-content: center; /* Centers any content */
+    align-items: center; /* Aligns items to the center */
+    flex-direction: column;  /* disables the default row to be in column */
+}
+
+nav ul {
+    list-style-type: none;  /* removes the bullet points */
+    margin: 0;  /* removes any margin */
+    padding: 0; /* removes any padding */
+    display: flex; /* Makes the list items a flex container */
+    justify-content: flex-start; /* Aligns items to the start of the container */
+    background-color: #333; /* Adds a background color */
+}
+
+nav li { /* creates spacing around li items in navbar */
+    padding: 5px 20px 5px 20px; /* top right bottom left */
+}
+
+nav li:hover{  /* sets up a roll over for the nav bar */
+    background-color: lightslategrey;
+}

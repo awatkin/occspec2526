@@ -6,11 +6,20 @@
     border: solid 1px red;
 }
 
+nav ul {
+    list-style-type: none;  /* removes the bullet points */
+    margin: 0;  /* removes any margin */
+    padding: 0; /* removes any padding */
+    display: flex; /* Makes the list items a flex container */
+    justify-content: flex-start; /* Aligns items to the start of the container */
+    background-color: #333; /* Adds a background color */
+}
+
 .topbar {
     border: solid 1px blue
 }
 
-.nav {
+.navi {
     border: solid 1px green
 }
 

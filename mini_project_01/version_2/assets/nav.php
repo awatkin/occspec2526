@@ -1,16 +1,17 @@
 <?php
-echo "<div class='nav'>";
-    echo "<table>";  #table used to help with layout of my hyperlinks
+echo "<div class='navi'>";
+echo "<nav>";  #decales
 
-        echo "<tr>";  # opens the table row (tr)
+echo "<ul>";  #declares an unordered list
 
-            echo "<td class='linkbox'> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
-            echo "<td class='linkbox'> <a href='plot.php'>Plot</a></td>";
-            echo "<td class='linkbox'> <a href='media.php'>Media</a></td>";
-            echo "<td class='linkbox'> <a href='mail.php'>Mail List</a></td>";
 
-        echo "</tr>";  # closes the row of the table.
+echo "<li class='linkbox'> <a href='characters.php'>Characters</a></li>"; #open a cell for a link to be housed
+echo "<li class='linkbox'> <a href='plot.php'>Plot</a></li>";
+echo "<li class='linkbox'> <a href='media.php'>Media</a></li>";
+echo "<li class='linkbox'> <a href='mail.php'>Mail List</a></li>";
 
-    echo "</table>";  # closes the table off
+echo "</ul>";  # closes the row of the table.
+
+echo "</nav>";
 
 echo "</div>";

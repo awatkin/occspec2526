@@ -1,0 +1,16 @@
+nav ul {
+    list-style-type: none;  /* removes the bullet points */
+    margin: 0;  /* removes any margin */
+    padding: 0; /* removes any padding */
+    display: flex; /* Makes the list items a flex container */
+    justify-content: flex-start; /* Aligns items to the start of the container */
+    background-color: yellowgreen; /* Adds a background color */
+}
+
+nav li {
+    padding: 5px 20px 5px 20px; /* top right bottom left */
+}
+
+nav li:hover {
+    background-color: #0c0575;
+}
