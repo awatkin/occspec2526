@@ -14,3 +14,13 @@ nav li {
 nav li:hover {
     background-color: #0c0575;
 }
+
+#error {
+    background-color: crimson;
+    color: black;
+}
+
+#umsg {
+    background-color: yellowgreen;
+    color: black;
+}

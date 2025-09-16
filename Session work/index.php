@@ -1,5 +1,15 @@
 <?php // This open the php code section
 
+session_start();
+
+require_once "assets/common.php";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){  #selection statement to ensure POST has been used (submit button on a form)
+
+    $_SESSION['msg'] = $_POST['message'];
+
+}
+
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
 echo "<html>";  # opens the html content of the page
@@ -21,12 +31,17 @@ require_once "assets/nav.php";
 
 echo "<div class='content'>";
 
+echo usr_msg();
 
 echo "<h2> Session Work </h2>";
 
 echo "This is where I will be putting some work in to working on session variable data";
 
-echo "<form>";
+#this form will take user input and store it in SESSION for output elsewhere
+
+
+
+echo "<form method='post' action=''>";
 
 echo "<input type='text' name='message' placeholder='Enter a message here'>";
 
