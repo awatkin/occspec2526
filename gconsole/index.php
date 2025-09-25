@@ -1,5 +1,9 @@
 <?php // This open the php code section
+
 session_start();
+
+require_once "assets/dbconn.php";
+
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
 echo "<html>";  # opens the html content of the page
@@ -29,6 +33,13 @@ echo "<br>";
 echo "<p id='intro'>Welcome to the home of tracking the consoles you own</p>";
 
 echo "<p id='usemenu'> Use the nav bar to navigate to the page you need </p>";
+
+try {
+    $conn = dbconnect_insert();
+    echo"success";
+}  catch (PDOException $e) {
+    echo $e->getMessage();
+}
 
 echo "</div>";
 
