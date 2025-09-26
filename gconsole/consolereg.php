@@ -1,6 +1,19 @@
 <?php // This open the php code section
 
 session_start();
+
+require_once("assets/dbconn.php");
+require_once("assets/common.php");
+
+if ($_SERVER["REQUEST_METHOD"] === "POST"){
+    try{
+        new_console(dbconnect_insert(), $_POST);
+        $_SESSION['usermessage'] = "SUCCESS: Console Created!";
+    } catch(PDOException $e){
+        $_SESSION['usermessage'] = $e->getMessage();
+    }
+}
+
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
 echo "<html>";  # opens the html content of the page
@@ -28,6 +41,11 @@ echo "<h1> G Console New Console Registration </h1>";
 echo "<br>";
 
 echo "<p id='intro'>Welcome to the home of tracking the consoles you own</p>";
+
+echo "<br>";
+echo user_message();
+echo "<br>";
+
 
 echo "<form method='post' action=''>";
 

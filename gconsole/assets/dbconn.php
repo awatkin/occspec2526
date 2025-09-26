@@ -3,9 +3,9 @@
 function dbconnect_insert(){
     $servername = "localhost";  //sets servername
 
-    $dbusername = "gconsoleinsert"; // had to change this variable name as it fought against the admin reg and user reg
+    $dbusername = "root"; // had to change this variable name as it fought against the admin reg and user reg
 
-    $dbpassword = "password1G";  //password for database useraccount
+    $dbpassword = "";  //password for database useraccount
 
     $dbname = "gconsole";  //database name to connect to
 
