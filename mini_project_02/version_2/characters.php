@@ -13,23 +13,17 @@ echo "</head>";  # closes the head section of the page
 
 echo "<body>";  # opens the body for the main content of the page.
 
-echo "<img id='formerslogo' src='images/formerslogo.webp' alt='Transformers Logo' />";  #sets a logo up for the top of each page
-echo "<br>";  # line break for clarity and easy of reading.
+echo "<div class='container'>";
 
-echo "<table>";  #table used to help with layout of my hyperlinks
-echo "<tr>";  # opens the table row (tr)
-echo "<td class='linkbox'> <a href='characters.php'>Characters</a></td>"; #open a cell for a link to be housed
-echo "<td class='linkbox'> <a href='checker.php'>Plot</a></td>";
-echo "<td class='linkbox'> <a href='media.php'>Media</a></td>";
-echo "<td class='linkbox'> <a href='mail.php'>Mail List</a></td>";
-echo "</tr>";  # closes the row of the table.
-echo "</table>";  # closes the table off
+include_once "assets/topbar.php";
 
-echo "<br>";
+include_once "assets/nav.php";
+
+echo "<div class='content'>";
 
 echo "<h2> Charactes of The Transformers Movie</h2>";  # sets a h2 heading as a welcome
 
-echo "<p class='content'> Below is the Characters from the movie and the actor that portrayed them.</p>";  # p tag to store some intro information
+echo "<p class='cont'> Below is the Characters from the movie and the actor that portrayed them.</p>";  # p tag to store some intro information
 
 echo "<table id='autobots'>";  # opens the table for autobots, id used for styling seperate.
 
@@ -42,35 +36,35 @@ echo "<table id='autobots'>";  # opens the table for autobots, id used for styli
 
     echo "<tr>";  # row for optius
         echo "<td>Optimus Prime</td>";
-        echo "<td><img class='autolog' src='images/autologo.png'></td>"; # added a class to allow across the board styling
+        echo "<td><img class='autolog' src='images/autologo.png'</td>"; # added a class to allow across the board styling
         echo "<td>Peter Cullen</td>";
         echo "<td>The leader of the Autobots, doomed to die early in the movie</td>";
     echo "</tr>";
 
     echo "<tr>";
         echo "<td>Hot Rod</td>";
-        echo "<td><img class='autolog' src='images/autologo.png'></td>";
+        echo "<td><img class='autolog' src='images/autologo.png'</td>";
         echo "<td>Judd Nelson</td>";
         echo "<td>A headstrong, cavalier Autobot warrior unknowingly destined to unleash the power of Matrix.</td>";
     echo "</tr>";
 
     echo "<tr>";
         echo "<td>Kup</td>";
-        echo "<td><img class='autolog' src='images/autologo.png'></td>";
+        echo "<td><img class='autolog' src='images/autologo.png'</td>";
         echo "<td>Lionel Stander</td>";
         echo "<td>A gruff, elderly Autobot warrior and mentor to Hot Rod.</td>";
     echo "</tr>";
 
     echo "<tr>";
         echo "<td>Ultra Magnus</td>";
-        echo "<td><img class='autolog' src='images/autologo.png'></td>";
+        echo "<td><img class='autolog' src='images/autologo.png'</td>";
         echo "<td>Robert Stack</td>";
         echo "<td>An elite soldier who takes Optimus's place as the Autobot commander and the bearer of the Matrix of Leadership.</td>";
     echo "</tr>";
 
     echo "<tr>";
         echo "<td>Arcee</td>";
-        echo "<td><img class='autolog' src='images/autologo.png'></td>";
+        echo "<td><img class='autolog' src='images/autologo.png'</td>";
         echo "<td>Susan Blu</td>";
         echo "<td>A highly skilled female Autobot</td>";
     echo "</tr>";
@@ -90,7 +84,7 @@ echo "<table id='autobots'>";  # opens the table for autobots, id used for styli
 
     echo "<tr>";
         echo "<td>Optimus Prime</td>";
-        echo "<td><img class='autolog' src='images/deceplogo.png'></td>";
+        echo "<td><img class='autolog' src='images/deceplogo.png'</td>";
         echo "<td>Peter Cullen</td>";
         echo "<td>The leader of the Autobots, doomed to die early in the movie</td>";
     echo "</tr>";
@@ -98,6 +92,8 @@ echo "<table id='autobots'>";  # opens the table for autobots, id used for styli
 
 echo "</table>";
 
+echo "</div>";
+echo "</div>";
 
 echo "</body>";
 
