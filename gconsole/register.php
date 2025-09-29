@@ -1,6 +1,25 @@
 <?php // This open the php code section
 
 session_start();
+
+require_once "assets/common.php";
+require_once "assets/dbconn.php";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    if(!only_user(dbconnect_insert(), $_POST["username"])){
+
+        if(reg_user(dbconnect_insert(),$_POST)) {
+            $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
+        } else {
+            $_SESSION["usermessage"] = "ERROR: USER REGISTRATION FAILED";
+        }
+    } else {
+        $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
+    }
+
+}
+
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
 echo "<html>";  # opens the html content of the page
@@ -42,6 +61,14 @@ echo "<br>";
 echo "<input type='text' name='country' placeholder='Country'>";
 echo "<br>";
 echo "<input type='submit' name='submit' value='Register'>";
+
+echo "</form>";
+
+echo "<br>";
+echo "<br>";
+
+echo user_message();
+
 
 echo "</div>";
 

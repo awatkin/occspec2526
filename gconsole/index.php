@@ -1,8 +1,16 @@
 <?php // This open the php code section
 
-session_start();
+if (!isset($_GET['message'])) {
+    session_start();
+    $message = false;
+} else {
+    // Decode the message for display
+    $message = htmlspecialchars(urldecode($_GET['message']));
+}
+
 
 require_once "assets/dbconn.php";
+require_once"assets/common.php";
 
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
@@ -34,11 +42,10 @@ echo "<p id='intro'>Welcome to the home of tracking the consoles you own</p>";
 
 echo "<p id='usemenu'> Use the nav bar to navigate to the page you need </p>";
 
-try {
-    $conn = dbconnect_insert();
-    echo"success";
-}  catch (PDOException $e) {
-    echo $e->getMessage();
+if (!$message){
+    echo user_message();
+} else {
+    echo $message;
 }
 
 echo "</div>";

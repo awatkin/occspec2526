@@ -1,5 +1,30 @@
 <?php // This open the php code section
 session_start();
+
+require_once"assets/dbconn.php";
+require_once"assets/common.php";
+
+if (isset($_SESSION['user'])){
+    $_SESSION['usermessage'] = "ERROR: You are already logged in!";
+    header("Location: index.php");
+    exit; // Stop further execution
+}
+elseif ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $usr = login(dbconnect_insert(), $_POST["username"]);
+
+    if ($usr && password_verify($_POST["password"], $usr["password"])) { // verifies the password is matched
+        $_SESSION["user"] = true;  // sets up the session variables
+        $_SESSION["userid"] = $usr["user_id"];
+        $_SESSION['usermessage'] = "SUCCESS: User Successfully Logged In";
+        header("location:index.php");  //redirect on success
+        exit;
+    } else {
+        $_SESSION['usermessage'] = "ERROR: User login passwords not match";
+        header("Location: login.php");
+        exit; // Stop further execution
+    }
+}
+
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
 echo "<html>";  # opens the html content of the page
