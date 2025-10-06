@@ -1,5 +1,8 @@
 <?php // This open the php code section
 
+session_start();
+require_once "assets/common.php";
+
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
 echo "<html>";  # opens the html content of the page
@@ -27,6 +30,10 @@ echo "<div class='content'>";
     echo "<p class='content'> Boiler plate text about the doctors surgery </p>";
 
 echo "<p class='content'> You have to be registered to login and book </p>";
+
+echo "<br>";
+
+echo usermessage();
 
 echo "</div>";
 

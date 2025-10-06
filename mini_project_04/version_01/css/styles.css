@@ -5,6 +5,16 @@
     flex-direction: column;
 }
 
+#usererror {
+    color: red;
+    border: 1px solid red;
+}
+
+#usermessage {
+    color: blue;
+    border: 1px solid darkblue;
+}
+
 nav ul {
     list-style-type: none;  /* removes the bullet points */
     margin: 0;  /* removes any margin */
