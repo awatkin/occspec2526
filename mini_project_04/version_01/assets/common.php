@@ -28,36 +28,27 @@ function onlyuser($conn, $email){  # At registration checks to make sure that no
 }
 
 function reg_user($conn){
-    try {
-        // Prepare and execute the SQL query
-        $sql = "INSERT INTO user (email, password, fname, sname, dob, sign_up, addressln1, addressln2, postcode, county, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";  //prepare the sql to be sent
-        $stmt = $conn->prepare($sql); //prepare to sql
 
-        $stmt->bindParam(1, $_POST['email']);  //bind parameters for security
-        // Hash the password
-        $stmt->bindParam(2, password_hash($_POST['password'], PASSWORD_DEFAULT));
-        $stmt->bindParam(3, $_POST['fname']);
-        $stmt->bindParam(4, $_POST['sname']);
-        $stmt->bindParam(5, $_POST['dob']);
-        $stmt->bindParam(6, date('Y-m-d'));
-        $stmt->bindParam(7, $_POST['addressln1']);
-        $stmt->bindParam(8, $_POST['addressln2']);
-        $stmt->bindParam(9, $_POST['postcode']);
-        $stmt->bindParam(10, $_POST['county']);
-        $stmt->bindParam(11, $_POST['phone']);
+    // Prepare and execute the SQL query
+    $sql = "INSERT INTO user (email, password, fname, sname, dob, sign_up, addressln1, addressln2, postcode, county, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";  //prepare the sql to be sent
+    $stmt = $conn->prepare($sql); //prepare to sql
 
-        $stmt->execute();  //run the query to insert
-        $conn = null;  // closes the connection so cant be abused.
-        return true; // Registration successful
-    }  catch (PDOException $e) {
-        // Handle database errors
-        error_log("User Reg Database error: " . $e->getMessage()); // Log the error
-        throw new Exception("User Reg Database error". $e); //Throw exception for calling script to handle.
-    } catch (Exception $e) {
-        // Handle validation or other errors
-        error_log("User Registration error: " . $e->getMessage()); //Log the error
-        throw new Exception("User Registration error: " . $e->getMessage()); //Throw exception for calling script to handle.
-    }
+    $stmt->bindParam(1, $_POST['email']);  //bind parameters for security
+    // Hash the password
+    $stmt->bindParam(2, password_hash($_POST['password'], PASSWORD_DEFAULT));
+    $stmt->bindParam(3, $_POST['fname']);
+    $stmt->bindParam(4, $_POST['sname']);
+    $stmt->bindParam(5, $_POST['dob']);
+    $stmt->bindParam(6, date('Y-m-d'));
+    $stmt->bindParam(7, $_POST['addressln1']);
+    $stmt->bindParam(8, $_POST['addressln2']);
+    $stmt->bindParam(9, $_POST['postcode']);
+    $stmt->bindParam(10, $_POST['county']);
+    $stmt->bindParam(11, $_POST['phone']);
+
+    $stmt->execute();  //run the query to insert
+    $conn = null;  // closes the connection so cant be abused.
+    return true; // Registration successful
 }
 
 function pwd_checker($password){
@@ -136,11 +127,16 @@ function lenchecker($password){
     }
 }
 
-function getnewuserid($conn){
-
+function getnewuserid($conn, $email){  # upon registering, retrieves the userid from the system to audit.
+    $sql = "SELECT userid FROM user WHERE email = ?"; //set up the sql statement
+    $stmt = $conn->prepare($sql); //prepares
+    $stmt->bindParam(1, $email);
+    $stmt->execute(); //run the sql code
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+    return $result["userid"];
 }
 
-function audtitor($conn, $userid, $code, $long){
+function audtitor($conn, $userid, $code, $long){  # on doing any action, auditor is called and the action recorded
     $sql = "INSERT INTO audit (date, userid, code, auditdescrip) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
 
@@ -148,7 +144,6 @@ function audtitor($conn, $userid, $code, $long){
     $stmt->bindParam(2, $userid);
     $stmt->bindParam(3, $code);
     $stmt->bindParam(4, $long);
-
 
     $stmt->execute();  //run the query to insert
     $conn = null;  // closes the connection so cant be abused.

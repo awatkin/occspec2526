@@ -18,16 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         } else {
             try{
-            reg_user(dbconnect_insert());
-            $_SESSION['usermessage'] = "SUCCESS: YOU have been registered!";
-            header("Location: index.php");
-            exit;
-        } catch (PDOException $e) {
+            if(onlyuser(dbconnect_select(),$_POST['email']) && reg_user(dbconnect_insert())) {
+                $_SESSION['usermessage'] = "SUCCESS: YOU have been registered!";
+                audtitor(dbconnect_insert(),getnewuserid(dbconnect_select(),$_POST['email']),"reg", "Registration of new user");
+                header("Location: index.php");
+                exit;
+            }
+            } catch (PDOException $e) {
                 $_SESSION['usermessage'] = "ERROR: " . $e->getMessage();
                 header("Location: register.php");
                 exit;
             } catch (Exception $e){
-            $_SESSION['usermessage'] = "ERROR: " . $e->getMessage();}
+                $_SESSION['usermessage'] = "ERROR: " . $e->getMessage();}
         }
 }
 

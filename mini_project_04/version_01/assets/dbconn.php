@@ -3,9 +3,9 @@
 function dbconnect_insert(){
     $servername = "localhost";  //sets servername
 
-    $dbusername = "poinsert"; // had to change this variable name as it fought against the admin reg and user reg
+    $dbusername = "root"; // had to change this variable name as it fought against the admin reg and user reg
 
-    $dbpassword = "Password01!";  //password for database useraccount
+    $dbpassword = "";  //password for database useraccount
 
     $dbname = "primaryoaks";  //database name to connect to
 
@@ -23,9 +23,9 @@ function dbconnect_insert(){
 function dbconnect_select(){
     $servername = "localhost";  //sets servername
 
-    $dbusername = "poselect"; // had to change this variable name as it fought against the admin reg and user reg
+    $dbusername = "root"; // had to change this variable name as it fought against the admin reg and user reg
 
-    $dbpassword = "Password01!";  //password for database useraccount
+    $dbpassword = "";  //password for database useraccount
 
     $dbname = "primaryoaks";  //database name to connect to
 
@@ -43,9 +43,9 @@ function dbconnect_select(){
 function dbconnect_update(){
     $servername = "localhost";  //sets servername
 
-    $dbusername = "poupdate"; // had to change this variable name as it fought against the admin reg and user reg
+    $dbusername = "root"; // had to change this variable name as it fought against the admin reg and user reg
 
-    $dbpassword = "Password01!";  //password for database useraccount
+    $dbpassword = "";  //password for database useraccount
 
     $dbname = "primaryoaks";  //database name to connect to
 
@@ -63,9 +63,9 @@ function dbconnect_update(){
 function dbconnect_delete(){
     $servername = "localhost";  //sets servername
 
-    $dbusername = "podelete"; // had to change this variable name as it fought against the admin reg and user reg
+    $dbusername = "root"; // had to change this variable name as it fought against the admin reg and user reg
 
-    $dbpassword = "Password01!";  //password for database useraccount
+    $dbpassword = "";  //password for database useraccount
 
     $dbname = "primaryoaks";  //database name to connect to
 
