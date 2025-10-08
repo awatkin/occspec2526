@@ -14,6 +14,19 @@ function usermessage(){
     return $msg;
 }
 
+function onlyuser($conn, $email){
+    $sql = "SELECT email FROM user WHERE email = ?"; //set up the sql statement
+    $stmt = $conn->prepare($sql); //prepares
+    $stmt->bindParam(1, $email);
+    $stmt->execute(); //run the sql code
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+    if ($result) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function reg_user($conn){
     try {
         // Prepare and execute the SQL query
@@ -121,4 +134,23 @@ function lenchecker($password){
     else{
         return "Rule 1 - Pass: Your password is longer than 8 characters";
     }
+}
+
+function getnewuserid($conn){
+
+}
+
+function audtitor($conn, $userid, $code, $long){
+    $sql = "INSERT INTO audit (date, userid, code, auditdescrip) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
+    $stmt = $conn->prepare($sql); //prepare to sql
+
+    $stmt->bindParam(1, date('Y-m-d'));  //bind parameters for security
+    $stmt->bindParam(2, $userid);
+    $stmt->bindParam(3, $code);
+    $stmt->bindParam(4, $long);
+
+
+    $stmt->execute();  //run the query to insert
+    $conn = null;  // closes the connection so cant be abused.
+    return true; // Registration successful
 }
