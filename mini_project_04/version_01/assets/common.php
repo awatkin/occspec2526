@@ -1,29 +1,29 @@
 <?php
 
-function usermessage(){
-    if(isset($_SESSION['usermessage'])){
-        if(str_contains($_SESSION['usermessage'],"ERROR")){
-            $msg = "<div id='usererror'>".$_SESSION['usermessage']."</div>";
-        } else {
-            $msg = "<div id='usermessage'>".$_SESSION['usermessage']."</div>";
+function usermessage(){  # function to check for a user message and return echoable string
+    if(isset($_SESSION['usermessage'])){  # checks to see if it is set
+        if(str_contains($_SESSION['usermessage'],"ERROR")){  # if it's an error
+            $msg = "<div id='usererror'>".$_SESSION['usermessage']."</div>";  # formats string appropriately
+        } else {  # if it's not an error
+            $msg = "<div id='usermessage'>".$_SESSION['usermessage']."</div>";  # positive message given
         }
-        unset($_SESSION['usermessage']);
+        unset($_SESSION['usermessage']);  # unsets the user message so it doesn't keep being displayed
     } else {
-        $msg = "";
+        $msg = "";  # if no message has been set, returns empty string.
     }
     return $msg;
 }
 
-function onlyuser($conn, $email){
+function onlyuser($conn, $email){  # At registration checks to make sure that no user already matches
     $sql = "SELECT email FROM user WHERE email = ?"; //set up the sql statement
     $stmt = $conn->prepare($sql); //prepares
     $stmt->bindParam(1, $email);
     $stmt->execute(); //run the sql code
     $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
-    if ($result) {
-        return true;
+    if ($result) {  # if a user is returned
+        return false; # return false so y
     } else {
-        return false;
+        return true;
     }
 }
 
