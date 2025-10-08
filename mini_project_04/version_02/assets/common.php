@@ -136,3 +136,33 @@ function getnewuserid($conn, $email){  # upon registering, retrieves the userid 
     return $result["userid"];
 }
 
+function login($conn, $email){
+        $sql = "SELECT userid, password FROM user WHERE email = ?"; //set up the sql statement
+        $stmt = $conn->prepare($sql); //prepares
+        $stmt->bindParam(1,$email);  //binds the parameters to execute
+        $stmt->execute(); //run the sql code
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+        $conn = null;  // nulls off the connection so cant be abused.
+
+        if($result){  // if there is a result returned
+            return $result;
+
+        } else {
+            return false;
+        }
+
+}
+
+function audtitor($conn, $userid, $code, $long){  # on doing any action, auditor is called and the action recorded
+    $sql = "INSERT INTO audit (date, userid, code, auditdescrip) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
+    $stmt = $conn->prepare($sql); //prepare to sql
+
+    $stmt->bindParam(1, date('Y-m-d'));  //bind parameters for security
+    $stmt->bindParam(2, $userid);
+    $stmt->bindParam(3, $code);
+    $stmt->bindParam(4, $long);
+
+    $stmt->execute();  //run the query to insert
+    $conn = null;  // closes the connection so cant be abused.
+    return true; // Registration successful
+}
