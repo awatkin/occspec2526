@@ -118,6 +118,7 @@ function getnewuserid($conn, $email){  # upon registering, retrieves the userid 
     $stmt->bindParam(1, $email);
     $stmt->execute(); //run the sql code
     $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+    $conn = null;
     return $result["user_id"];
 }
 
@@ -125,7 +126,7 @@ function audtitor($conn, $userid, $code, $long){  # on doing any action, auditor
     $sql = "INSERT INTO audit (date, userid, code, longdesc) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
     $date = date('Y-m-d'); # only variables should be passed, not direct calls to functions
-    $stmt->bindParam(1, date('Y-m-d'));  //bind parameters for security
+    $stmt->bindParam(1, $date);  //bind parameters for security
     $stmt->bindParam(2, $userid);
     $stmt->bindParam(3, $code);
     $stmt->bindParam(4, $long);

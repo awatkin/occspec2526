@@ -5,6 +5,12 @@ session_start();
 require_once("assets/dbconn.php");
 require_once("assets/common.php");
 
+if (!isset($_SESSION['user'])){
+    $_SESSION['usermessage'] = "ERROR: You need to be logged in!";
+    header("Location: login.php");
+    exit; // Stop further execution
+}
+
 if ($_SERVER["REQUEST_METHOD"] === "POST"){
     try{
         new_console(dbconnect_insert(), $_POST);
