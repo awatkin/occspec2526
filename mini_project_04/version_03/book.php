@@ -2,6 +2,7 @@
 
 session_start();
 require_once "assets/common.php";
+require_once "assets/dbconn.php";
 
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
@@ -30,7 +31,11 @@ echo "<br>";
 
 echo "<form action='' method='post'>";
 
+$staff = staf_geter(dbconnect_select());
 
+foreach ($staff as $staf){
+    echo $staf['role']." ".$staf['sname']." ".$staf['fname']." ".$staf['room']."<br>";
+}
 
 echo "<input type='submit' name='submit' value='Book Appointment' />";
 

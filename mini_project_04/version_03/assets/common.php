@@ -170,84 +170,15 @@ function audtitor($conn, $userid, $code, $long){  # on doing any action, auditor
 function staf_geter($conn){
     // function to get all the staff suitable for an appointment
 
+    $sql = "SELECT role, fname, sname, room FROM staff WHERE role != ? ORDER BY role DESC";
     //get all staff from datbase where role NOT equal to "adm" - this is admin role, none bookable
+    $stmt = $conn->prepare($sql);
+    $exclude_role = "adm";
 
-    //sort desc on role
+    $stmt->bindParam(1, $exclude_role);
 
-    //return
-
-
-    /**
-     * Selects staff members who are not 'adm' and sorts them by role descending.
-     *
-     * @param mysqli $conn The database connection object.
-     * @return array|false An array of staff records or false on failure.
-     */
-        // SQL query with a placeholder (?) for the role condition
-        $sql = "SELECT role, fname, sname, room FROM staff WHERE role != ? ORDER BY role DESC";
-
-        // Value for the placeholder
-        $exclude_role = "adm";
-
-        // 1. Prepare the statement
-        if ($stmt = $conn->prepare($sql)) {
-
-            // 2. Bind the variable to the placeholder
-            // 's' indicates the variable type is a string
-            $stmt->bind_param("s", $exclude_role);
-
-            // 3. Execute the statement
-            if ($stmt->execute()) {
-
-                // 4. Get the result set
-                $result = $stmt->get_result();
-                $staff_data = [];
-
-                // 5. Fetch all rows as an associative array
-                while ($row = $result->fetch_assoc()) {
-                    $staff_data[] = $row;
-                }
-
-                // 6. Close the statement
-                $stmt->close();
-
-                // Return the fetched data
-                return $staff_data;
-
-            } else {
-                // Execution failed
-                error_log("Execute failed: " . $stmt->error);
-                $stmt->close();
-                return false;
-            }
-
-        } else {
-            // Preparation failed
-            error_log("Prepare failed: " . $conn->error);
-            return false;
-        }
-    }
-
-// --- Example Usage (Requires a working database connection $mysqli_conn) ---
-    /*
-    // Assume $mysqli_conn is a valid mysqli connection object
-    // $mysqli_conn = new mysqli("localhost", "user", "pass", "dbname");
-
-    $staff_list = getNonAdminStaff($mysqli_conn);
-
-    if ($staff_list) {
-        echo "<h2>Non-Admin Staff List:</h2>";
-        foreach ($staff_list as $staff) {
-            echo "Role: " . htmlspecialchars($staff['role']) .
-                 ", Name: " . htmlspecialchars($staff['fname']) . " " . htmlspecialchars($staff['sname']) .
-                 ", Room: " . htmlspecialchars($staff['room']) . "<br>";
-        }
-    } else {
-        echo "Could not retrieve staff data.";
-    }
-
-    // $mysqli_conn->close();
-    */
-
-
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result;
 }
