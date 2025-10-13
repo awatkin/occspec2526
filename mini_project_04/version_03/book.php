@@ -32,6 +32,8 @@ echo "<form action='' method='post'>";
 
 
 
+echo "<input type='submit' name='submit' value='Book Appointment' />";
+
 echo "</form>";
 
 echo "<br>";
