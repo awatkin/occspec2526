@@ -170,7 +170,7 @@ function audtitor($conn, $userid, $code, $long){  # on doing any action, auditor
 function staf_geter($conn){
     // function to get all the staff suitable for an appointment
 
-    $sql = "SELECT role, fname, sname, room FROM staff WHERE role != ? ORDER BY role DESC";
+    $sql = "SELECT staffid, role, fname, sname, room FROM staff WHERE role != ? ORDER BY role DESC";
     //get all staff from datbase where role NOT equal to "adm" - this is admin role, none bookable
     $stmt = $conn->prepare($sql);
     $exclude_role = "adm";
