@@ -183,22 +183,17 @@ function staf_geter($conn){
     return $result;
 }
 
-function commit_booking($conn, $appt){
-    $sql = "INSERT INTO user (email, password, fname, sname, dob, sign_up, addressln1, addressln2, postcode, county, phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";  //prepare the sql to be sent
+function commit_booking($conn, $epoch){
+    $sql = "INSERT INTO book (userid, staffid, appointmentdate, bookedon) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
 
-    $stmt->bindParam(1, $_POST['email']);  //bind parameters for security
+    $stmt->bindParam(1, $_SESSION["userid"]);  //bind parameters for security
     // Hash the password
-    $stmt->bindParam(2, password_hash($_POST['password'], PASSWORD_DEFAULT));
-    $stmt->bindParam(3, $_POST['fname']);
-    $stmt->bindParam(4, $_POST['sname']);
-    $stmt->bindParam(5, $_POST['dob']);
-    $stmt->bindParam(6, date('Y-m-d'));
-    $stmt->bindParam(7, $_POST['addressln1']);
-    $stmt->bindParam(8, $_POST['addressln2']);
-    $stmt->bindParam(9, $_POST['postcode']);
-    $stmt->bindParam(10, $_POST['county']);
-    $stmt->bindParam(11, $_POST['phone']);
+    $stmt->bindParam(2, $_POST['staff']);
+    $stmt->bindParam(3, $epoch);
+    $tmp = time();
+    $stmt->bindParam(4, $tmp);
+
 
     $stmt->execute();  //run the query to insert
     $conn = null;  // closes the connection so cant be abused.

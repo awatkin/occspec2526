@@ -4,31 +4,33 @@ session_start();
 require_once "assets/common.php";
 require_once "assets/dbconn.php";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if (!isset($_SESSION['userid'])) {
+    $_SESSION['usermessage'] = "ERROR: You are not logged in!";
+    header("Location: login.php");
+    exit;
+} elseif($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    $tmp = $_POST["appt_date"]. ' ' . $_POST["appt_time"];
-    $epoch_time = strtotime($tmp);
+    try {
 
-    echo $epoch_time;
-    echo time();
+        $tmp = $_POST["appt_date"] . ' ' . $_POST["appt_time"];
+        $epoch_time = strtotime($tmp);
+        if(commit_booking(dbconnect_insert(),$epoch_time)){
+            $_SESSION['usermessage'] = "SUCCESS: YOUR Booking has been made!";
+            header("Location: bookings.php");
+            exit;
+        } else {
+            $_SESSION['usermessage'] = "ERROR: Booking has failed!";
+        }
 
-
-//    try{
-//        book_appointment(dbconnect_insert());
-//        $_SESSION['usermessage'] = "SUCESS: You have booked your appointment on ". $_POST['date'] ." at ". $_POST['time'];
-//        header("location: book.php");
-//        exit;
-//    } catch(PDOException $e){
-//        $_SESSION['usermessage'] = $e->getMessage();
-//        header("location: book.php");
-//        exit;
-//    } catch(Exception $e){
-//        $_SESSION['usermessage'] = $e->getMessage();
-//        header("location: book.php");
-//        exit;
-//    }
-
+    }
+    catch (PDOException $e){
+        $_SESSION['usermessage'] = "ERROR: " . $e->getMessage();
+    } catch(Exception $e){
+        $_SESSION['usermessage'] = "ERROR: " . $e->getMessage();
+    }
 }
+
+
 
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 

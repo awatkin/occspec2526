@@ -13,8 +13,8 @@ if (isset($_SESSION['userid'])) {
     $usr = login(dbconnect_insert(), $_POST["email"]);
 
     if ($usr && password_verify($_POST["password"], $usr["password"])) { // verifies the password is matched
-        $_SESSION["userid"] = $usr["user_id"];
-        $_SESSION['usermessage'] = "SUCCESS: User Successfully Logged In";
+        $_SESSION["userid"] = $usr["userid"];
+        $_SESSION['usermessage'] = "SUCCESS: User Successfully Logged In " . $_SESSION['userid'];
         audtitor(dbconnect_insert(),$_SESSION["userid"],"log", "User has successfully logged in");
         header("location:index.php");  //redirect on success
         exit;

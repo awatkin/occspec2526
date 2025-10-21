@@ -40,7 +40,7 @@ echo "<p class='content'> You have to be registered to login and book </p>";
 echo "<br>";
 
 if (!$message){
-    echo user_message();
+    echo usermessage();
 } else {
     echo $message;
 }

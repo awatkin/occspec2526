@@ -6,7 +6,7 @@ echo "<ul>";  #declares an unordered list
 
 
 echo "<li class='linkbox'> <a href='index.php'>Home</a></li>"; #open a cell for a link to be housed
-if(!isset($_SESSION['user'])){
+if(!isset($_SESSION['userid'])){
     echo "<li class='linkbox'> <a href='login.php'>Login</a></li>";
     echo "<li class='linkbox'> <a href='register.php'>Register</a></li>";
 } else {
