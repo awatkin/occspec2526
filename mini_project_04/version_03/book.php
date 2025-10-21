@@ -5,20 +5,28 @@ require_once "assets/common.php";
 require_once "assets/dbconn.php";
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    try{
-        book_appointment(dbconnect_insert());
-        $_SESSION['usermessage'] = "SUCESS: You have booked your appointment on ". $_POST['date'] ." at ". $_POST['time'];
-        header("location: book.php");
-        exit;
-    } catch(PDOException $e){
-        $_SESSION['usermessage'] = $e->getMessage();
-        header("location: book.php");
-        exit;
-    } catch(Exception $e){
-        $_SESSION['usermessage'] = $e->getMessage();
-        header("location: book.php");
-        exit;
-    }
+
+    $tmp = $_POST["appt_date"]. ' ' . $_POST["appt_time"];
+    $epoch_time = strtotime($tmp);
+
+    echo $epoch_time;
+    echo time();
+
+
+//    try{
+//        book_appointment(dbconnect_insert());
+//        $_SESSION['usermessage'] = "SUCESS: You have booked your appointment on ". $_POST['date'] ." at ". $_POST['time'];
+//        header("location: book.php");
+//        exit;
+//    } catch(PDOException $e){
+//        $_SESSION['usermessage'] = $e->getMessage();
+//        header("location: book.php");
+//        exit;
+//    } catch(Exception $e){
+//        $_SESSION['usermessage'] = $e->getMessage();
+//        header("location: book.php");
+//        exit;
+//    }
 
 }
 
@@ -51,10 +59,15 @@ echo "<form action='' method='post'>";
 
 $staff = staf_geter(dbconnect_select());
 
-echo "<input type='date' name='date' value='" . date("Y-m-d") . "'>";
-// this time field needs looking at!!
-echo "<input type='time' name='time' value='" . date("Y-m-d") . "'>";
 
+echo "<label for='appt_time'> Appointment Time:</label>";
+echo "<input type='time' name='appt_time' required>";
+
+echo "<br>";
+echo "<label for='appt_date'> Appointment Date:</label>";
+echo "<input type='date' name='appt_date' required>";
+
+echo "<br>";
 echo "<select name='staff'>";
 
 foreach ($staff as $staf){
@@ -64,12 +77,13 @@ foreach ($staff as $staf){
     } else if ($staf['role'] = "nur"){
         $role = "Nurse";
     }
-    echo "<option value =".$staf['staffid']. ">" .$role." ".$staf['sname']." ".$staf['fname']." Room ".$staf['room']."</option>";
+    echo "<option value =".$staf['staffid']. ">" .$role." ".$staf['sname']." ".
+        $staf['fname']." Room ".$staf['room']."</option>";
 }
 
 echo "</select>";
 
-
+echo "<br>";
 
 
 echo "<input type='submit' name='submit' value='Book Appointment' />";

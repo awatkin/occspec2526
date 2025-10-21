@@ -47,10 +47,24 @@ function staffreg_user($conn){
 }
 
 function getnewstaffid($conn, $email){  # upon registering, retrieves the userid from the system to audit.
-$sql = "SELECT userid FROM staff WHERE email = ?"; //set up the sql statement
-$stmt = $conn->prepare($sql); //prepares
-$stmt->bindParam(1, $email);
-$stmt->execute(); //run the sql code
-$result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
-return $result["staffid"];
+    $sql = "SELECT userid FROM staff WHERE email = ?"; //set up the sql statement
+    $stmt = $conn->prepare($sql); //prepares
+    $stmt->bindParam(1, $email);
+    $stmt->execute(); //run the sql code
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+    return $result["staffid"];
+}
+
+function audtitor($conn, $userid, $code, $long){  # on doing any action, auditor is called and the action recorded
+    $sql = "INSERT INTO staffaudit (date, userid, code, auditdescrip) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
+    $stmt = $conn->prepare($sql); //prepare to sql
+
+    $stmt->bindParam(1, date('Y-m-d'));  //bind parameters for security
+    $stmt->bindParam(2, $userid);
+    $stmt->bindParam(3, $code);
+    $stmt->bindParam(4, $long);
+
+    $stmt->execute();  //run the query to insert
+    $conn = null;  // closes the connection so cant be abused.
+    return true; // Registration successful
 }
