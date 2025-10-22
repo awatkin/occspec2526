@@ -13,9 +13,9 @@ if (!isset($_SESSION['userid'])) {  # If they have managed to get to this page w
     if(isset($_POST['appdelete'])){
         try{
             if(cancel_appt(dbconnect_delete(), $_POST['apptid'])){
-                $_SESSION['usermessage'] = "SUCCESS: Your Appointment was cancelled";
+                $_SESSION['message'] = "SUCCESS: Your Appointment was cancelled";
             } else {
-                $_SESSION['usermessage'] = "ERROR: Could not able to execute complete this action";
+                $_SESSION['message'] = "ERROR: Could not able to execute complete this action";
             }
 
         } catch(PDOException $e) {
@@ -23,10 +23,6 @@ if (!isset($_SESSION['userid'])) {  # If they have managed to get to this page w
         } catch (Exception $e){
             $_SESSION['message'] = "ERROR: ".$e->getMessage();
         }
-    } elseif (isset($_POST['appchange'])) {
-        $_SESSION['apptid'] = $_POST['apptid'];
-        header('Location: alterbooking.php');
-        exit;
     }
 }
 
@@ -51,46 +47,58 @@ echo "<div class='container'>";
 
 echo "<div class='content'>";
 
-echo usermessage();
+
 
     echo "<br>";
 
     echo "<h2> Primary Oaks - Your Bookings</h2>";  # sets a h2 heading as a welcome
 
-    echo "<p class='content'> Below are your bookings </p>";
+echo usermessage();
+
+    echo "<p class='content'> Adjust your booking below </p>";
+
     $appts = appt_getter(dbconnect_select());
-    if (!$appts) {
-        echo "no appts found";
-    } else {
 
-        echo "<table id='bookings'>";
+echo "<form action='' method='post'>";
 
-        foreach ($appts as $appt) {
-            if ($appt['role'] = "doc") {
-                $role = "Doctor";
-            } else if ($appt['role'] = "nur") {
-                $role = "Nurse";
-            }
-
-            echo "<form action='' method='post'>";
-
-            echo "<tr>";
-            echo "<td> Date: " . date('M d, Y @ h:i A', $appt['appointmentdate']) . "</td>";
-            echo "<td> Made on: " . date('M d, Y @ h:i A', $appt['bookedon']) . "</td>";
-            echo "<td> With: " . $role . " " . $appt['fname'] . " " . $appt['sname'] . "</td>";
-            echo "<td> in: " . $appt['room'] . "</td>";
-            echo "<td><input type='hidden' name='apptid' value=".$appt['bookid']."> 
-                   <input type='submit' name='appdelete' value='Cancel Appt' />
-                   <input type='submit' name='appchange' value='Change Appt' /></td>";
-
-            echo "</tr>";
-            echo "</form>";
-
-        }
+$staff = staf_geter(dbconnect_select());
 
 
-        echo "</table>";
+echo "<label for='appt_time'> Appointment Time:</label>";
+echo "<input type='time' name='appt_time' required>";
+
+echo "<br>";
+echo "<label for='appt_date'> Appointment Date:</label>";
+echo "<input type='date' name='appt_date' required>";
+
+echo "<br>";
+echo "<select name='staff'>";
+
+foreach ($staff as $staf){
+
+    if ($staf['role'] = "doc"){
+        $role = "Doctor";
+    } else if ($staf['role'] = "nur"){
+        $role = "Nurse";
     }
+    echo "<option value =".$staf['staffid']. ">" .$role." ".$staf['sname']." ".
+        $staf['fname']." Room ".$staf['room']."</option>";
+}
+
+# USE "SELECTED" TO SET WHICH DOC / NURSE
+
+echo "</select>";
+
+echo "<br>";
+
+
+echo "<input type='submit' name='submit' value='Book Appointment' />";
+
+echo "</form>";
+
+
+
+
 echo "<br>";
 
 

@@ -223,7 +223,6 @@ function cancel_appt($conn, $aptid){
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(1, $aptid);
     $stmt->execute();
-    $stmt->close();
-    $stmt = null;
     $conn = null;
+    return true;
 }
