@@ -217,3 +217,13 @@ function appt_getter($conn){
     }
 
 }
+
+function cancel_appt($conn, $aptid){
+    $sql = "DELETE FROM book WHERE bookid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $aptid);
+    $stmt->execute();
+    $stmt->close();
+    $stmt = null;
+    $conn = null;
+}
