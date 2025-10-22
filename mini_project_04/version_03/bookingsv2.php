@@ -9,6 +9,21 @@ if (!isset($_SESSION['userid'])) {  # If they have managed to get to this page w
     $_SESSION['usermessage'] = "ERROR: You are not logged in!";
     header("Location: login.php");
     exit;
+} elseif($_SERVER["REQUEST_METHOD"] === "POST") {
+    if(isset($_POST['appdelete'])){
+        try{
+            if(cancel_appt(dbconnect_delete(), $_POST['apptid'])){
+                $_SESSION['message'] = "SUCCESS: Your Appointment was cancelled";
+            } else {
+                $_SESSION['message'] = "ERROR: Could not able to execute complete this action";
+            }
+
+        } catch(PDOException $e) {
+            $_SESSION['message'] = "ERROR: ".$e->getMessage();
+        } catch (Exception $e){
+            $_SESSION['message'] = "ERROR: ".$e->getMessage();
+        }
+    }
 }
 
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
@@ -53,12 +68,18 @@ echo usermessage();
                 $role = "Nurse";
             }
 
+            echo "<form action='' method='post'>";
+
             echo "<tr>";
             echo "<td> Date: " . date('M d, Y @ h:i A', $appt['appointmentdate']) . "</td>";
             echo "<td> Made on: " . date('M d, Y @ h:i A', $appt['bookedon']) . "</td>";
             echo "<td> With: " . $role . " " . $appt['fname'] . " " . $appt['sname'] . "</td>";
             echo "<td> in: " . $appt['room'] . "</td>";
+            echo "<td><input type='hidden' name='apptid' value=".$appt['bookid']."> 
+                   <input type='submit' name='appdelete' value='Cancel Appt' /></td>";
+
             echo "</tr>";
+            echo "</form>";
 
         }
 

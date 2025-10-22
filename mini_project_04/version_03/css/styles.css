@@ -28,22 +28,9 @@ nav li {
     margin: 0 10px 0 10px;
 }
 
-.topbar {
-}
-
-.navi {
-}
-
-.content {
- }
-
 body { /*  this will style the background and the font */
     background-color: mediumseagreen;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-#formerslogo { /*  this will set the size of my logo to be suitable */
-    width: 20%;
 }
 
 h2 { /*  this will style any heading h2 type */
@@ -62,10 +49,6 @@ h2 { /*  this will style any heading h2 type */
     background-color: #a34e08;
 }
 
-.autolog {
-    width: 40px
-}
-
 td {
     padding: 5px;
 }
@@ -76,8 +59,8 @@ td {
     }
 }
 
-#decepticons{
-    tr:hover {
-        background-color: #0c0575;
+#bookings{
+    table, th, td {
+        border: 1px solid black;
     }
 }
