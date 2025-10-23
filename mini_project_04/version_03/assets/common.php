@@ -203,7 +203,10 @@ function commit_booking($conn, $epoch){
 function appt_getter($conn){
     // function to get all the staff suitable for an appointment
 
-    $sql = "SELECT b.bookid, b.appointmentdate, b.bookedon, s.role, s.fname, s.sname, s.room from book b JOIN staff s ON b.staffid = s.staffid WHERE b.userid = ? ORDER BY b.appointmentdate ASC";
+    $sql = "SELECT b.bookid, b.appointmentdate, b.bookedon, s.role, 
+       s.fname, s.sname, s.room FROM book b JOIN staff s 
+           ON b.staffid = s.staffid WHERE b.userid = ? 
+                                     ORDER BY b.appointmentdate ASC";
     $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(1, $_SESSION["userid"]);

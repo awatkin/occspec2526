@@ -239,3 +239,14 @@ function appt_fetch($conn, $bookid){
     $conn = null;
    return $result;
 }
+
+function appt_update($conn, $bookid, $apptime){
+    $sql = "UPDATE book SET staffid = ?, appointmentdate = ?  WHERE bookid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_POST["staff"]);
+    $stmt->bindParam(2, $apptime);
+    $stmt->bindParam(3, $bookid);
+    $stmt->execute();
+    $conn = null;
+    return true;
+}

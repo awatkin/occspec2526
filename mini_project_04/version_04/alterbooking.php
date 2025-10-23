@@ -10,20 +10,20 @@ if (!isset($_SESSION['userid'])) {  # If they have managed to get to this page w
     header("Location: login.php");
     exit;
 } elseif($_SERVER["REQUEST_METHOD"] === "POST") {
-//    if(isset($_POST['appdelete'])){
-//        try{
-//            if(cancel_appt(dbconnect_delete(), $_POST['apptid'])){
-//                $_SESSION['message'] = "SUCCESS: Your Appointment was cancelled";
-//            } else {
-//                $_SESSION['message'] = "ERROR: Could not able to execute complete this action";
-//            }
-//
-//        } catch(PDOException $e) {
-//            $_SESSION['message'] = "ERROR: ".$e->getMessage();
-//        } catch (Exception $e){
-//            $_SESSION['message'] = "ERROR: ".$e->getMessage();
-//        }
-//    }
+    $tmp = $_POST["appt_date"] . ' ' . $_POST["appt_time"];
+    $epoch_time = strtotime($tmp);
+    if(appt_update(dbconnect_insert(),$_SESSION['apptid'],$epoch_time)){
+        $_SESSION['usermessage'] = "SUCCESS: Your appointment updated successfully!";
+        unset($_SESSION['apptid']);
+        header("Location: bookings.php");
+        exit;
+    } else {
+        $_SESSION['usermessage'] = "ERROR: Your appointment failed to update!";
+        unset($_SESSION['apptid']);
+        header("Location: bookings.php");
+        exit;
+    }
+
 }
 
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
@@ -92,14 +92,12 @@ foreach ($staff as $staf){
         $staf['fname']." Room ".$staf['room']."</option>";
 }
 
-# USE "SELECTED" TO SET WHICH DOC / NURSE
-
 echo "</select>";
 
 echo "<br>";
 
 
-echo "<input type='submit' name='submit' value='Book Appointment' />";
+echo "<input type='submit' name='submit' value='Update Appointment' />";
 
 echo "</form>";
 

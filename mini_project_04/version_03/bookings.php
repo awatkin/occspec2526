@@ -62,7 +62,6 @@ echo usermessage();
 
         }
 
-
         echo "</table>";
     }
 echo "<br>";
