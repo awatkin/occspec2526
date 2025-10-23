@@ -218,3 +218,24 @@ function appt_getter($conn){
 
 }
 
+function cancel_appt($conn, $aptid){
+    $sql = "DELETE FROM book WHERE bookid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $aptid);
+    $stmt->execute();
+    $conn = null;
+    return true;
+}
+
+function appt_fetch($conn, $bookid){
+    $sql = "SELECT * FROM book WHERE bookid = ?";
+    //get all staff from datbase where role NOT equal to "adm" - this is admin role, none bookable
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(1, $bookid);
+
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+   return $result;
+}

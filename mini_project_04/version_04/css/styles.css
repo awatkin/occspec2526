@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#usererror {
+    color: red;
+    border: 1px solid red;
+}
+
+#usermessage {
+    color: blue;
+    border: 1px solid darkblue;
+}
+
+nav ul {
+    list-style-type: none;  /* removes the bullet points */
+    margin: 0;  /* removes any margin */
+    padding: 0; /* removes any padding */
+    display: flex; /* Makes the list items a flex container */
+    justify-content: flex-start; /* Aligns items to the start of the container */
+    background-color: #333; /* Adds a background color */
+}
+
+nav li {
+    margin: 0 10px 0 10px;
+}
+
+body { /*  this will style the background and the font */
+    background-color: mediumseagreen;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 { /*  this will style any heading h2 type */
+    color:#8f301b;
+}
+
+.cont { /*  this will style the class of items called "content" which is paragraphs*/
+    color:#a34e08;
+}
+
+.linkbox{ /*  this will style the class of items called "linkbox" which is part of my menu bar*/
+    background-color: #dba20f;
+}
+
+.linkbox:hover{ /*  this will style linkbox when a cursor is over it*/
+    background-color: #a34e08;
+}
+
+td {
+    padding: 5px;
+}
+
+#autobots{
+    tr:hover {
+        background-color: #8f301b;
+    }
+}
+
+#bookings{
+    table, th, td {
+        border: 1px solid black;
+    }
+}

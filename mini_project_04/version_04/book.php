@@ -1,30 +1,36 @@
 <?php // This open the php code section
 
-session_start();  # connect back to the session for data in there
+session_start();
+require_once "assets/common.php";
+require_once "assets/dbconn.php";
 
-require_once "assets/common.php";  # bring in the common functions we need
-require_once "assets/dbconn.php"; # get the connection functions for the database
-
-if (!isset($_SESSION['userid'])) {  # If they have managed to get to this page without loggining
+if (!isset($_SESSION['userid'])) {
     $_SESSION['usermessage'] = "ERROR: You are not logged in!";
     header("Location: login.php");
     exit;
-} elseif($_SERVER["REQUEST_METHOD"] === "POST") {
-    if(isset($_POST['appdelete'])){
-        try{
-            if(cancel_appt(dbconnect_delete(), $_POST['apptid'])){
-                $_SESSION['message'] = "SUCCESS: Your Appointment was cancelled";
-            } else {
-                $_SESSION['message'] = "ERROR: Could not able to execute complete this action";
-            }
+} elseif($_SERVER["REQUEST_METHOD"] == "POST"){
 
-        } catch(PDOException $e) {
-            $_SESSION['message'] = "ERROR: ".$e->getMessage();
-        } catch (Exception $e){
-            $_SESSION['message'] = "ERROR: ".$e->getMessage();
+    try {
+
+        $tmp = $_POST["appt_date"] . ' ' . $_POST["appt_time"];
+        $epoch_time = strtotime($tmp);
+        if(commit_booking(dbconnect_insert(),$epoch_time)){
+            $_SESSION['usermessage'] = "SUCCESS: YOUR Booking has been made!";
+            header("Location: bookings.php");
+            exit;
+        } else {
+            $_SESSION['usermessage'] = "ERROR: Booking has failed!";
         }
+
+    }
+    catch (PDOException $e){
+        $_SESSION['usermessage'] = "ERROR: " . $e->getMessage();
+    } catch(Exception $e){
+        $_SESSION['usermessage'] = "ERROR: " . $e->getMessage();
     }
 }
+
+
 
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
@@ -46,18 +52,10 @@ echo "<div class='container'>";
     require_once "assets/nav.php";
 
 echo "<div class='content'>";
-
-
-
     echo "<br>";
 
-    echo "<h2> Primary Oaks - Your Bookings</h2>";  # sets a h2 heading as a welcome
-
-echo usermessage();
-
-    echo "<p class='content'> Adjust your booking below </p>";
-
-    $appts = appt_getter(dbconnect_select());
+    echo "<h2> Primary Oaks - Appointment Booking System</h2>";  # sets a h2 heading as a welcome
+echo "<br>";
 
 echo "<form action='' method='post'>";
 
@@ -85,8 +83,6 @@ foreach ($staff as $staf){
         $staf['fname']." Room ".$staf['room']."</option>";
 }
 
-# USE "SELECTED" TO SET WHICH DOC / NURSE
-
 echo "</select>";
 
 echo "<br>";
@@ -96,12 +92,9 @@ echo "<input type='submit' name='submit' value='Book Appointment' />";
 
 echo "</form>";
 
-
-
-
 echo "<br>";
 
-
+echo usermessage();
 
 echo "</div>";
 
