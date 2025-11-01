@@ -55,7 +55,7 @@ function getnewstaffid($conn, $email){  # upon registering, retrieves the userid
     return $result["staffid"];
 }
 
-function audtitor($conn, $userid, $code, $long){  # on doing any action, auditor is called and the action recorded
+function staff_audtitor($conn, $userid, $code, $long){  # on doing any action, auditor is called and the action recorded
     $sql = "INSERT INTO staffaudit (date, userid, code, auditdescrip) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
 

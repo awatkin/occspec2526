@@ -13,6 +13,7 @@ if (!isset($_SESSION['userid'])) {  # If they have managed to get to this page w
     $tmp = $_POST["appt_date"] . ' ' . $_POST["appt_time"];
     $epoch_time = strtotime($tmp);
     if(appt_update(dbconnect_insert(),$_SESSION['apptid'],$epoch_time)){
+        audtitor(dbconnect_insert(), $_SESSION['userid'], "UPB", "Updated their booking for a new time / date");
         $_SESSION['usermessage'] = "SUCCESS: Your appointment updated successfully!";
         unset($_SESSION['apptid']);
         header("Location: bookings.php");

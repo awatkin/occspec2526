@@ -14,7 +14,7 @@ function usermessage(){  # function to check for a user message and return echoa
     return $msg;
 }
 function onlystaffuser($conn, $email){  # At registration checks to make sure that no user already matches
-    $sql = "SELECT email FROM staff WHERE email = ?"; //set up the sql statement
+    $sql = "SELECT email FROM admin WHERE email = ?"; //set up the sql statement
     $stmt = $conn->prepare($sql); //prepares
     $stmt->bindParam(1, $email);
     $stmt->execute(); //run the sql code
@@ -29,7 +29,7 @@ function onlystaffuser($conn, $email){  # At registration checks to make sure th
 function staffreg_user($conn){
 
     // Prepare and execute the SQL query
-    $sql = "INSERT INTO staff (role, email, password, fname, sname, room) VALUES (?, ?, ?, ?, ?, ?)";  //prepare the sql to be sent
+    $sql = "INSERT INTO admin (role, email, password, fname, sname, room) VALUES (?, ?, ?, ?, ?, ?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
 
     $stmt->bindParam(1, $_POST['role']);  //bind parameters for security
@@ -47,7 +47,7 @@ function staffreg_user($conn){
 }
 
 function getnewstaffid($conn, $email){  # upon registering, retrieves the userid from the system to audit.
-    $sql = "SELECT userid FROM staff WHERE email = ?"; //set up the sql statement
+    $sql = "SELECT userid FROM admin WHERE email = ?"; //set up the sql statement
     $stmt = $conn->prepare($sql); //prepares
     $stmt->bindParam(1, $email);
     $stmt->execute(); //run the sql code

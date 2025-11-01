@@ -1,0 +1,18 @@
+audit codes:
+
+user codes:
+
+REG : Registered as a user
+LGI : Login successfully
+LGO : Logged out
+FLG : Failed login
+APB : Appopintment booked
+UPB : Appointment changed
+APC : APPOINTMENT Cancelled
+
+
+APPOINTMENT STATUS CODES:
+
+BKD : Appointment has been booked
+ATD : Attended the appointment 
+MSD : Appointment Missed

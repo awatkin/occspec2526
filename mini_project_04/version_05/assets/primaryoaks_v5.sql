@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 21, 2025 at 12:11 PM
+-- Generation Time: Nov 01, 2025 at 02:09 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,6 +24,34 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `adminid` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `joindate` int(11) NOT NULL,
+  `role` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `adminaudit`
+--
+
+CREATE TABLE `adminaudit` (
+  `autidid` int(11) NOT NULL,
+  `adminid` int(11) NOT NULL,
+  `date` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `longdesc` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `audit`
 --
 
@@ -34,6 +62,18 @@ CREATE TABLE `audit` (
   `code` text NOT NULL,
   `auditdescrip` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `audit`
+--
+
+INSERT INTO `audit` (`auditid`, `date`, `userid`, `code`, `auditdescrip`) VALUES
+(1, '2025-11-01 00:00:00', 2, 'REG', 'Registration of new user'),
+(2, '2025-11-01 00:00:00', 2, 'LGI', 'User has successfully logged in'),
+(3, '2025-11-01 00:00:00', 2, 'LGO', 'User has successfully logged out'),
+(4, '2025-11-01 00:00:00', 2, 'LGI', 'User has successfully logged in'),
+(5, '2025-11-01 00:00:00', 2, 'APB', 'Updated their booking for a new time / date'),
+(6, '2025-11-01 00:00:00', 2, 'UPB', 'Updated their booking for a new time / date');
 
 -- --------------------------------------------------------
 
@@ -46,13 +86,21 @@ CREATE TABLE `book` (
   `userid` int(11) NOT NULL,
   `staffid` int(11) NOT NULL,
   `appointmentdate` int(11) NOT NULL,
-  `bookedon` int(11) NOT NULL
+  `bookedon` int(11) NOT NULL,
+  `status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `book`
+--
+
+INSERT INTO `book` (`bookid`, `userid`, `staffid`, `appointmentdate`, `bookedon`, `status`) VALUES
+(1, 2, 1, 1762729800, 1762002338, 'BKD');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `staff`
 --
 
 CREATE TABLE `staff` (
@@ -66,7 +114,7 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `admin`
+-- Dumping data for table `staff`
 --
 
 INSERT INTO `staff` (`staffid`, `role`, `email`, `password`, `fname`, `sname`, `room`) VALUES
@@ -114,11 +162,24 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userid`, `email`, `password`, `fname`, `sname`, `dob`, `sign_up`, `addressln1`, `addressln2`, `postcode`, `county`, `phone`) VALUES
-(1, 'a.w@g.com', '$2y$10$05z4fzEMf6SbXBpx/ohm1edqVA4aoVTXUVZxAnB9BqKyFUT1G70fK', 'A', 'W', '2025-10-06', '2025-10-06', '23sfgwev', '', 'wfw', 'wcowe', '9877');
+(1, 'a.w@g.com', '$2y$10$05z4fzEMf6SbXBpx/ohm1edqVA4aoVTXUVZxAnB9BqKyFUT1G70fK', 'A', 'W', '2025-10-06', '2025-10-06', '23sfgwev', '', 'wfw', 'wcowe', '9877'),
+(2, 'adam.watkin@gmail.com', '$2y$10$/wzw3mNBzPClqw9mNRdW0OVAuEgtk2zbe7AIZ0BqMlcPVqD80/v8K', 'A', 'W', '2025-11-01', '2025-11-01', 'j', 'hg', 'hg', 'hg', 'yg');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`adminid`);
+
+--
+-- Indexes for table `adminaudit`
+--
+ALTER TABLE `adminaudit`
+  ADD PRIMARY KEY (`autidid`);
 
 --
 -- Indexes for table `audit`
@@ -136,7 +197,7 @@ ALTER TABLE `book`
   ADD KEY `staffid` (`staffid`);
 
 --
--- Indexes for table `admin`
+-- Indexes for table `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`staffid`);
@@ -159,19 +220,31 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `adminid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `adminaudit`
+--
+ALTER TABLE `adminaudit`
+  MODIFY `autidid` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `audit`
 --
 ALTER TABLE `audit`
-  MODIFY `auditid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `auditid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
   MODIFY `staffid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
@@ -186,7 +259,7 @@ ALTER TABLE `staffaudit`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

@@ -168,10 +168,10 @@ function audtitor($conn, $userid, $code, $long){  # on doing any action, auditor
 }
 
 function staf_geter($conn){
-    // function to get all the staff suitable for an appointment
+    // function to get all the admin suitable for an appointment
 
-    $sql = "SELECT staffid, role, fname, sname, room FROM staff WHERE role != ? ORDER BY role DESC";
-    //get all staff from datbase where role NOT equal to "adm" - this is admin role, none bookable
+    $sql = "SELECT staffid, role, fname, sname, room FROM admin WHERE role != ? ORDER BY role DESC";
+    //get all admin from datbase where role NOT equal to "adm" - this is admin role, none bookable
     $stmt = $conn->prepare($sql);
     $exclude_role = "adm";
 
@@ -189,7 +189,7 @@ function commit_booking($conn, $epoch){
 
     $stmt->bindParam(1, $_SESSION["userid"]);  //bind parameters for security
     // Hash the password
-    $stmt->bindParam(2, $_POST['staff']);
+    $stmt->bindParam(2, $_POST['admin']);
     $stmt->bindParam(3, $epoch);
     $tmp = time();
     $stmt->bindParam(4, $tmp);
@@ -201,10 +201,10 @@ function commit_booking($conn, $epoch){
 }
 
 function appt_getter($conn){
-    // function to get all the staff suitable for an appointment
+    // function to get all the admin suitable for an appointment
 
     $sql = "SELECT b.bookid, b.appointmentdate, b.bookedon, s.role, 
-       s.fname, s.sname, s.room FROM book b JOIN staff s 
+       s.fname, s.sname, s.room FROM book b JOIN admin s 
            ON b.staffid = s.staffid WHERE b.userid = ? 
                                      ORDER BY b.appointmentdate ASC";
     $stmt = $conn->prepare($sql);

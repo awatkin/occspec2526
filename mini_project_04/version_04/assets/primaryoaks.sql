@@ -52,7 +52,7 @@ CREATE TABLE `book` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `staff` (
@@ -66,7 +66,7 @@ CREATE TABLE `staff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `staff`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `staff` (`staffid`, `role`, `email`, `password`, `fname`, `sname`, `room`) VALUES
@@ -136,7 +136,7 @@ ALTER TABLE `book`
   ADD KEY `staffid` (`staffid`);
 
 --
--- Indexes for table `staff`
+-- Indexes for table `admin`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`staffid`);
@@ -171,7 +171,7 @@ ALTER TABLE `book`
   MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `staff`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `staff`
   MODIFY `staffid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;

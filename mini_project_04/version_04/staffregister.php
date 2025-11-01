@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             try{
             if(onlystaffuser(dbconnect_select(),$_POST['email']) && staffreg_user(dbconnect_insert())) {
                 $_SESSION['usermessage'] = "SUCCESS: Staff have been registered!";
-                audtitor(dbconnect_insert(),getnewstaffid(dbconnect_select(),$_POST['email']),"sre", "Registration of new staff");
+                audtitor(dbconnect_insert(),getnewstaffid(dbconnect_select(),$_POST['email']),"sre", "Registration of new admin");
                 header("Location: staffregister.php");
                 exit;
             }
@@ -51,7 +51,7 @@ require_once "assets/nav.php";
 echo "<div class='content'>";
 echo "<br>";
 
-echo "<h2> Primary Oaks - ADMIN Add staff</h2>";  # sets a h2 heading as a welcome
+echo "<h2> Primary Oaks - ADMIN Add admin</h2>";  # sets a h2 heading as a welcome
 
 echo "<p class='content'> Please complete the below form to register for our system </p>";
 

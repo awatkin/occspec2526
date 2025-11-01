@@ -52,7 +52,7 @@ CREATE TABLE `book` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `staff` (
@@ -106,7 +106,7 @@ ALTER TABLE `book`
   ADD KEY `staffid` (`staffid`);
 
 --
--- Indexes for table `staff`
+-- Indexes for table `admin`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`staffid`);
@@ -134,7 +134,7 @@ ALTER TABLE `book`
   MODIFY `bookid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `staff`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `staff`
   MODIFY `staffid` int(11) NOT NULL AUTO_INCREMENT;

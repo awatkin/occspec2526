@@ -36,7 +36,7 @@ echo "<html>";  # opens the html content of the page
 echo "<head>";  # opens the head section
 
 echo "<title> version 3</title>";  # sets the title of the page (web browser tab)
-echo "<link rel='stylesheet' type='text/css' href='css/styles.css' />";  # links to the external style sheet
+echo "<link rel='stylesheet' type='text/css' href='../css/styles.css' />";  # links to the external style sheet
 
 echo "</head>";  # closes the head section of the page
 

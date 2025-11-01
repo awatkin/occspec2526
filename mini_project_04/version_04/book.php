@@ -70,7 +70,7 @@ echo "<label for='appt_date'> Appointment Date:</label>";
 echo "<input type='date' name='appt_date' required>";
 
 echo "<br>";
-echo "<select name='staff'>";
+echo "<select name='admin'>";
 
 foreach ($staff as $staf){
 
