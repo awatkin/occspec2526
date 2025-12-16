@@ -1,5 +1,5 @@
 .container {
-    width: 99%;
+    border: 5px solid #B30000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -49,8 +49,8 @@ nav li {
 }
 
 body { /*  this will style the background and the font */
-    background-color:#B30000;
     color:#FAF0E6;
+    background-color: #0F7833;
     font-family: Arial, Helvetica, sans-serif;
 }
 

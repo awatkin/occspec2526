@@ -18,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         } else {
             try{
-            if(onlyuser(dbconnect_select(),$_POST['email']) && reg_user(dbconnect_insert())) {
+            if(onlyuser(dbconnect(),$_POST['email']) && reg_user(dbconnect())) {
                 $_SESSION['usermessage'] = "SUCCESS: YOU have been registered!";
-                audtitor(dbconnect_insert(),getnewuserid(dbconnect_select(),$_POST['email']),"reg", "Registration of new user");
+                audtitor(dbconnect(),getnewuserid(dbconnect(),$_POST['email']),"reg", "Registration of new user");
                 header("Location: login.php");
                 exit;
             }
@@ -39,7 +39,7 @@ echo "<html>";  # opens the html content of the page
 
 echo "<head>";  # opens the head section
 
-echo "<title> version 2</title>";  # sets the title of the page (web browser tab)
+echo "<title> North Pole Ine</title>";  # sets the title of the page (web browser tab)
 echo "<link rel='stylesheet' type='text/css' href='css/styles.css' />";  # links to the external style sheet
 
 echo "</head>";  # closes the head section of the page
@@ -55,7 +55,7 @@ require_once "assets/nav.php";
 echo "<div class='content'>";
 echo "<br>";
 
-echo "<h2> Primary Oaks - User registration system</h2>";  # sets a h2 heading as a welcome
+echo "<h2> Wish List Registration System </h2>";  # sets a h2 heading as a welcome
 
 echo "<p class='content'> Please complete the below form to register for our system </p>";
 
@@ -71,17 +71,19 @@ echo "<input type='text' name='fname' placeholder='Firstname' required/>";
 echo"<br>";
 echo "<input type='text' name='sname' placeholder='Surname' required/>";
 echo"<br>";
-echo "<input type='date' name='dob' value=". date('Y-m-d')." required/>";
-echo"<br>";
 echo "<input type='text' name='addressln1' placeholder='Address Line 1' required/>";
 echo"<br>";
 echo "<input type='text' name='addressln2' placeholder='Address Line 2' />";
 echo"<br>";
-echo "<input type='text' name='postcode' placeholder='Postcode' required/>";
+echo "<input type='text' name='addressln3' placeholder='Address Line 3' />";
+echo"<br>";
+echo "<input type='text' name='citytown' placeholder='City / Town' required/>";
 echo"<br>";
 echo "<input type='text' name='county' placeholder='County' required/>";
 echo"<br>";
-echo "<input type='text' name='phone' placeholder='Phone Number' required/>";
+echo "<input type='text' name='postcode' placeholder='Post / Zip Code' required/>";
+echo"<br>";
+echo "<input type='text' name='country' placeholder='Country' required/>";
 echo"<br>";
 echo "<input type='submit' name='submit' value='Register' />";
 echo"<br>";
