@@ -15,7 +15,7 @@ echo "<div class='navi'>";
 
             } else {
 
-                echo "<li class='linkbox'> <a href='wishlish.php'>Wish List</a></li>";
+                echo "<li class='linkbox'> <a href='wishlist.php'>Wish List</a></li>";
                 echo "<li class='linkbox'> <a href='addgift.php'>Add a Gift</a></li>";
                 echo "<li class='linkbox'> <a href='behave.php'>Nice / Naughty</a></li>";
                 echo "<li class='linkbox'> <a href='logout.php'>Logout</a></li>";

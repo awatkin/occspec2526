@@ -93,3 +93,83 @@ function login($conn, $email){
         return false;
     }
 }
+
+function wish_getter($conn){
+    // function to get all the gifts in their wishlist
+
+    $sql = "SELECT w.wishid, w.addedon, g.name, g.description from wish w JOIN gift g ON w.giftid = g.giftid WHERE w.userid = ? ORDER BY g.name ASC";
+    $stmt = $conn->prepare($sql);
+
+    $stmt->bindParam(1, $_SESSION["userid"]);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    if($result){
+        return $result;
+    } else {
+        return false;
+    }
+}
+
+function reg_gift($conn){
+    $sql = "INSERT INTO gift (name, description, addedon) VALUES (?, ?, ?)";  //prepare the sql to be sent
+    $stmt = $conn->prepare($sql); //prepare to sql
+
+    $stmt->bindParam(1, $_POST['name']);
+    $stmt->bindParam(2, $_POST['description']);
+    $happenedon = time();
+    $stmt->bindParam(3, $happenedon);
+    $stmt->execute();  //run the query to insert
+    $conn = null;  // closes the connection so cant be abused.
+    return true; // Registration successful
+}
+
+function gift_getter($conn){
+    $sql = "SELECT * FROM gift"; //set up the sql statement
+    $stmt = $conn->prepare($sql); //prepares
+    $stmt->execute(); //run the sql code
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);  //brings back results
+    $conn = null;  // nulls off the connection so cant be abused.
+
+    if($result){  // if there is a result returned
+        return $result;
+    } else {
+        return false;
+    }
+}
+
+function wish_gift($conn, $giftid){
+    $sql = "INSERT INTO wish (userid, giftid, addedon) VALUES (?, ?, ?)";  //prepare the sql to be sent
+    $stmt = $conn->prepare($sql); //prepare to sql
+
+    $stmt->bindParam(1, $_SESSION['userid']);
+    $stmt->bindParam(2, $giftid);
+    $happenedon = time();
+    $stmt->bindParam(3, $happenedon);
+    $stmt->execute();  //run the query to insert
+    $conn = null;  // closes the connection so cant be abused.
+    return true; // Registration successful
+}
+
+function get_new_gift($conn){
+    $sql = "SELECT * FROM gift ORDER BY giftid DESC LIMIT 1";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+    $conn = null;
+    if($result){
+        return $result;
+    } else {
+        return false;
+    }
+}
+
+function unwish($conn,$wishid){
+    $sql = "DELETE FROM wish WHERE wishid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $wishid);
+    $stmt->execute();
+    $conn = null;
+    return true;
+}
